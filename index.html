@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simple, copy-paste copyright date snippets that actually stay current. No excuses.">
+    <title>CopyrightYear - Stop Hard-coding Your Copyright Dates</title>
+    <style>
+        :root {
+            --bg: #1a1a1a;
+            --text: #e0e0e0;
+            --accent: #4a9eff;
+            --code-bg: #2d2d2d;
+            --border: #404040;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            padding: 2rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #999;
+        }
+        
+        h2 {
+            color: var(--accent);
+            margin: 2.5rem 0 1rem;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: #ccc;
+            margin: 1.5rem 0 0.8rem;
+            font-size: 1.3rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .snippet {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .snippet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .snippet-label {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+        
+        .copy-btn {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        
+        .copy-btn:hover {
+            opacity: 0.8;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        code {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            background: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            display: block;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        
+        .inline-code {
+            display: inline;
+            padding: 0.1rem 0.3rem;
+        }
+        
+        .example-output {
+            background: #0a0a0a;
+            border-left: 3px solid var(--accent);
+            padding: 0.8rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+        
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .footer-copyright {
+            margin-top: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .why-section {
+            background: var(--code-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .quality-signal {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CopyrightYear</h1>
+        <p class="tagline">Stop hard-coding your copyright dates. It's 2026, this shouldn't be hard.</p>
+    </header>
+
+    <main>
+        <div class="why-section">
+            <h2>Why This Matters</h2>
+            <p>An outdated copyright date is a <span class="quality-signal">quality signal</span>. When your site says "© 2019" in 2025, you're broadcasting:</p>
+            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                <li>Nobody's maintaining this</li>
+                <li>Attention to detail is lacking</li>
+                <li>The site might be abandoned</li>
+            </ul>
+            <p style="margin-top: 1rem;">If you can't update a four-digit number once a year, what else are you neglecting?</p>
+        </div>
+
+        <h2>The Solutions</h2>
+        <p>Pick your poison. All of these work. No frameworks required.</p>
+
+        <h3>Plain HTML + JavaScript</h3>
+        <div class="snippet">
+            <div class="snippet-header">
+                <span class="snippet-label">Client-side (works anywhere)</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'html-js')">Copy</button>
+            </div>
+            <code id="html-js">&lt;p&gt;Copyright © 1992-&lt;span id="year"&gt;&lt;/span&gt; Your Company&lt;/p&gt;
+&lt;script&gt;
+  document.getElementById('year').textContent = new Date().getFullYear();
+&lt;/script&gt;</code>
+        </div>
+        <div class="example-output">
+            Output: Copyright © 1992-<span id="demo-year"></span> Your Company
+        </div>
+
+        <h3>PHP (WordPress, Laravel, etc.)</h3>
+        <div class="snippet">
+            <div class="snippet-header">
+                <span class="snippet-label">Server-side rendering</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'php')">Copy</button>
+            </div>
+            <code id="php">Copyright © 1992-&lt;?php echo date('Y'); ?&gt; Your Company</code>
+        </div>
+
+        <h3>Python (Flask, Django)</h3>
+        <div class="snippet">
+            <div class="snippet-header">
+                <span class="snippet-label">Template context</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'python')">Copy</button>
+            </div>
+            <code id="python">from datetime import datetime
+
+# In your view/context:
+context = {
+    'current_year': datetime.now().year
+}
+
+# In template:
+Copyright © 1992-{{ current_year }} Your Company</code>
+        </div>
+
+        <h3>Ruby (Rails, Jekyll)</h3>
+        <div class="snippet">
+            <div class="snippet-header">
+                <span class="snippet-label">ERB/Liquid templates</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'ruby')">Copy</button>
+            </div>
+            <code id="ruby">Copyright © 1992-&lt;%= Time.now.year %&gt; Your Company
+
+# Or in Jekyll (_config.yml):
+start_year: 1992
+
+# Then in template:
+Copyright © {{ site.start_year }}-{{ 'now' | date: "%Y" }} Your Company</code>
+        </div>
+
+        <h3>Node.js (Express, Next.js)</h3>
+        <div class="snippet">
+            <div class="snippet-header">
+                <span class="snippet-label">Template engines</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'node')">Copy</button>
+            </div>
+            <code id="node">// In your view context:
+res.render('page', { 
+    currentYear: new Date().getFullYear() 
+});
+
+// In template:
+Copyright © 1992-{{ currentYear }} Your Company
+
+// Or React component:
+&lt;footer&gt;
+  Copyright © 1992-{new Date().getFullYear()} Your Company
+&lt;/footer&gt;</code>
+        </div>
+
+        <h3>Hugo (Static Site Generator)</h3>
+        <div class="snippet">
+            <div class="snippet-header">
+                <span class="snippet-label">Built-in template function</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'hugo')">Copy</button>
+            </div>
+            <code id="hugo">Copyright © 1992-{{ now.Year }} Your Company</code>
+        </div>
+
+        <h3>Eleventy (11ty)</h3>
+        <div class="snippet">
+            <div class="snippet-header">
+                <span class="snippet-label">Nunjucks/Liquid shortcode</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'eleventy')">Copy</button>
+            </div>
+            <code id="eleventy">// .eleventy.js
+module.exports = function(eleventyConfig) {
+  eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+};
+
+// In template:
+Copyright © 1992-{% year %} Your Company</code>
+        </div>
+
+        <h2>Semantic HTML Bonus</h2>
+        <p>Use the <code class="inline-code">&lt;time&gt;</code> element for machine-readable dates:</p>
+        <div class="snippet">
+            <div class="snippet-header">
+                <span class="snippet-label">Accessible & semantic</span>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'semantic')">Copy</button>
+            </div>
+            <code id="semantic">&lt;footer&gt;
+  &lt;p&gt;Copyright © 
+    &lt;time datetime="1992"&gt;1992&lt;/time&gt;-&lt;time id="current-year" datetime=""&gt;&lt;/time&gt; 
+    Your Company
+  &lt;/p&gt;
+&lt;/footer&gt;
+&lt;script&gt;
+  const year = new Date().getFullYear();
+  const el = document.getElementById('current-year');
+  el.textContent = year;
+  el.setAttribute('datetime', year);
+&lt;/script&gt;</code>
+        </div>
+
+        <h2>The Hall of Shame</h2>
+        <p>Things you should <strong>not</strong> do:</p>
+        <div class="snippet">
+            <code>❌ Copyright © 2019 YourCompany (hard-coded, forgotten)
+❌ Copyright © 2019-2021 YourCompany (abandoned mid-pandemic)
+❌ Copyright © &lt;!-- TODO: update this --&gt; (developer honesty, but still broken)</code>
+        </div>
+
+        <h2>Deployment</h2>
+        <p>This site itself is hosted on GitHub Pages. To deploy your own:</p>
+        <div class="snippet">
+            <code># Create repo, add index.html, push
+git init
+git add index.html
+git commit -m "Stop the madness"
+git branch -M main
+git remote add origin https://github.com/yourusername/copyright-year.git
+git push -u origin main
+
+# Enable GitHub Pages in repo settings → Pages → Source: main branch</code>
+        </div>
+    </main>
+
+    <footer>
+        <p>Built because someone noticed not many sites do this right.</p>
+        <p class="footer-copyright">
+            Copyright © <time datetime="2025">2025</time> 
+            <span id="footer-year"></span>
+            — Practicing what we preach.
+        </p>
+        <p style="margin-top: 1rem; font-size: 0.85rem;">
+            <a href="https://copyrightmonkey.github.io/" style="color: var(--accent);">Source on GitHub</a>
+        </p>
+    </footer>
+
+    <script>
+        // Set demo year
+        document.getElementById('demo-year').textContent = new Date().getFullYear();
+        
+        // Set footer year with semantic time element
+        const footerYear = new Date().getFullYear();
+        const footerYearEl = document.getElementById('footer-year');
+        const timeEl = document.createElement('time');
+        timeEl.setAttribute('datetime', footerYear);
+        timeEl.textContent = footerYear;
+        footerYearEl.appendChild(timeEl);
+
+        // Copy to clipboard function
+        function copyToClipboard(button, elementId) {
+            const code = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+            });
+        }
+    </script>
+</body>
+</html>
