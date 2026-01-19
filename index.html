@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Simple, copy-paste copyright date snippets that actually stay current. No excuses.">
     <title>CopyrightYear - Stop Hard-coding Your Copyright Dates</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>©</text></svg>">
     <style>
         :root {
             --bg: #1a1a1a;
@@ -159,13 +160,13 @@
 <body>
     <header>
         <h1>CopyrightYear</h1>
-        <p class="tagline">Stop hard-coding your copyright dates. It's 2026, this shouldn't be hard.</p>
+        <p class="tagline">Stop hard-coding your copyright dates. It's <span id="tagline-year"></span>, this shouldn't be hard.</p>
     </header>
 
     <main>
         <div class="why-section">
             <h2>Why This Matters</h2>
-            <p>An outdated copyright date is a <span class="quality-signal">quality signal</span>. When your site says "© 2019" in 2026, you're broadcasting:</p>
+            <p>An outdated copyright date is a <span class="quality-signal">quality signal</span>. When your site says "© <span id="example-old-year"></span>" in <span id="example-current-year"></span>, you're broadcasting:</p>
             <ul style="margin-left: 2rem; margin-top: 0.5rem;">
                 <li>Nobody's maintaining this</li>
                 <li>Attention to detail is lacking</li>
@@ -303,6 +304,7 @@ Copyright © 1992-{% year %} Your Company</code>
         <div class="snippet">
             <code>❌ Copyright © 2019 YourCompany (hard-coded, forgotten)
 ❌ Copyright © 2019-2021 YourCompany (abandoned mid-pandemic)
+❌ Copyright © 2026 YourCompany (we did this initially, fixed it before launch)
 ❌ Copyright © &lt;!-- TODO: update this --&gt; (developer honesty, but still broken)</code>
         </div>
 
@@ -322,20 +324,34 @@ git push -u origin main
     </main>
 
     <footer>
-        <p>Built because someone noticed not many sites do this right.</p>
+        <p>Built because someone noticed even <a href="https://www.barebones.com" style="color: var(--accent);">BBEdit</a> occasionally forgets to update their copyright.</p>
         <p class="footer-copyright">
-            Copyright © <time datetime="2025">2025</time> 
+            Copyright © <time datetime="2026">2026</time>
             <span id="footer-year"></span>
             — Practicing what we preach.
         </p>
-        <p style="margin-top: 1rem; font-size: 0.85rem;">
-            <a href="https://copyrightmonkey.github.io/" style="color: var(--accent);">Source on GitHub</a>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: #999;">
+            Created with 
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D97757'%3E%3Cpath d='M22.5 12c0 5.799-4.701 10.5-10.5 10.5S1.5 17.799 1.5 12 6.201 1.5 12 1.5 22.5 6.201 22.5 12z'/%3E%3Cpath fill='%23000' d='M8.337 14.842c-.01 1.406.676 2.216 1.596 2.216 1.408 0 2.15-1.889 2.15-4.487 0-1.92-.405-3.116-1.462-3.116-1.06 0-1.663.908-1.853 1.876h-.065l.405-5.59H6.318l-.877 11.924h2.093l.016-.377c.205-.933.787-2.446.787-2.446zm7.326 0c-.01 1.406.675 2.216 1.595 2.216 1.408 0 2.15-1.889 2.15-4.487 0-1.92-.405-3.116-1.461-3.116-1.061 0-1.664.908-1.854 1.876h-.065l.406-5.59h-2.79l-.877 11.924h2.093l.016-.377c.205-.933.787-2.446.787-2.446z'/%3E%3C/svg%3E" alt="Claude" style="height: 1em; vertical-align: middle; margin: 0 0.2em;"> 
+            <a href="https://claude.ai" style="color: var(--accent);">Claude</a>
+            by <a href="https://anthropic.com" style="color: var(--accent);">Anthropic</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem;">
+            <a href="https://github.com/copyrightmonkey/copyright-year" style="color: var(--accent);">Source on GitHub</a>
         </p>
     </footer>
 
     <script>
+        // Set current year examples
+        const currentYear = new Date().getFullYear();
+        const oldYear = currentYear - 7; // Always 7 years stale for dramatic effect
+        
+        document.getElementById('tagline-year').textContent = currentYear;
+        document.getElementById('example-old-year').textContent = oldYear;
+        document.getElementById('example-current-year').textContent = currentYear;
+        
         // Set demo year
-        document.getElementById('demo-year').textContent = new Date().getFullYear();
+        document.getElementById('demo-year').textContent = currentYear;
         
         // Set footer year with semantic time element
         const footerYear = new Date().getFullYear();
